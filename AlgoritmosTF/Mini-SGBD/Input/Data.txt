@@ -1,0 +1,7 @@
+Nombre,Apellido,Edad,Sexo,
+Freddy,Vega,33,M,
+Marcos,Gonzales,50,M,
+Maria,Fernandez,19,F,
+Danna,Paola,27,F,
+Alexander,Hamilton,27,M,
+Erika,Diaz,44,F

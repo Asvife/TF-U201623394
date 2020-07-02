@@ -1,0 +1,5 @@
+Nombre,Apellido,Edad,Sexo,Ciudad,
+Maria,Fernandez,19,F,ARE,
+Marcos,Gonzales,50,M,LIM,
+Alexander,Hamilton,27,M,BAR,
+Danna,Paola,27,F,LON,
