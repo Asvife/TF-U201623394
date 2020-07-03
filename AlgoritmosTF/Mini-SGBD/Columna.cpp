@@ -9,7 +9,7 @@ Columna::Columna()
 Columna::Columna(vector<Dato*> set, MATCH comp, string tag)
 {
 	Tags = set[0]->getTags();
-	Col = new SimpleBST(comp, tag);
+	Col = new AvlTree(comp, tag);
 	for each (Dato* var in set)
 	{
 		Col->add(var);
@@ -21,7 +21,7 @@ Columna::~Columna()
 {
 }
 
-SimpleBST * Columna::getCol()
+AvlTree * Columna::getCol()
 {
 	return Col;
 }

@@ -1,16 +1,16 @@
 #pragma once
 #include "Dato.h"
-#include "SimpleBST.h"
+#include "AvlTree.h"
 class Columna
 {
-	SimpleBST* Col;
+	AvlTree* Col;
 	vector<string> Tags;
 public:
 	Columna();
 	Columna(vector<Dato*> set, MATCH comp, string tag);
 	~Columna();
 
-	SimpleBST* getCol();
+	AvlTree* getCol();
 	vector<Dato*> getVector();
 	vector<string> getTags();
 };

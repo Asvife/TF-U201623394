@@ -307,7 +307,7 @@ private: System::Windows::Forms::ComboBox^  comboBox2;
 		 String^ filter2;
 		 List<String^>^ Tags;
 private: System::Windows::Forms::TextBox^  textBox2;
-		 SimpleBST* displayTree;
+		 AvlTree* displayTree;
 private: System::Windows::Forms::Button^  filtrarColumna;
 private: System::Windows::Forms::ListBox^  ColumnasFiltro;
 private: System::Windows::Forms::Label^  label1;

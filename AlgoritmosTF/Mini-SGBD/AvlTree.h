@@ -12,7 +12,7 @@ using namespace std;
 typedef std::function<int(Dato* a, Dato* b)>  COMP;
 typedef std::function<int(Dato* a, Dato* b, string tag)>  MATCH;
 
-class SimpleBST {
+class AvlTree {
 	struct Node {
 		Dato * element;
 		Node* left;
@@ -45,8 +45,8 @@ private:
 	int height(Node* node);
 	string toUpper(string str);
 public:
-	SimpleBST(MATCH comp, string tag);
-	~SimpleBST();
+	AvlTree(MATCH comp, string tag);
+	~AvlTree();
 	void clear();
 	void add(Dato * elem);
 	bool find(Dato * elem);
@@ -59,7 +59,7 @@ public:
 	void inorder(std::function<void(Dato *)> proc);
 
 	void BSTtoVector(vector<Dato*> &vec);
-	SimpleBST* VectortoBST(const vector<Dato*> vec);
+	AvlTree* VectortoBST(const vector<Dato*> vec);
 	vector<Dato*> Filter(Node* root);
 	vector<Dato*> Greater(string tag, Dato* dato);
 	vector<Dato*> Minor(string tag, Dato* dato);

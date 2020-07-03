@@ -13,7 +13,7 @@ public:
 	void changeRow(int row);
 	void Init(vector<Dato*> data, vector<string>tags);
 	void Read(string file);
-	SimpleBST* getCurrentTree();
+	AvlTree* getCurrentTree();
 	vector<Dato*> getCurrentVector();
 	vector<string> getTags();
 };

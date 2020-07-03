@@ -1,16 +1,16 @@
-#include "SimpleBST.h"
+#include "AvlTree.h"
 
-bool SimpleBST::endsWith(const std::string& str, const std::string& suffix)
+bool AvlTree::endsWith(const std::string& str, const std::string& suffix)
 {
 	return str.size() >= suffix.size() && 0 == str.compare(str.size() - suffix.size(), suffix.size(), suffix);
 }
 
-bool SimpleBST::startsWith(const std::string& str, const std::string& prefix)
+bool AvlTree::startsWith(const std::string& str, const std::string& prefix)
 {
 	return str.size() >= prefix.size() && 0 == str.compare(0, prefix.size(), prefix);
 }
 
-SimpleBST::SimpleBST(MATCH comp, string tag)
+AvlTree::AvlTree(MATCH comp, string tag)
 {
 	this->tag = tag;
 	this->comp = comp;
@@ -19,12 +19,12 @@ SimpleBST::SimpleBST(MATCH comp, string tag)
 }
 
 
-SimpleBST::~SimpleBST()
+AvlTree::~AvlTree()
 {
 	clear(this->root);
 }
 
-void SimpleBST::clear(Node * node)
+void AvlTree::clear(Node * node)
 {
 	if (node != nullptr) {
 		clear(node->left);
@@ -34,7 +34,7 @@ void SimpleBST::clear(Node * node)
 	}
 }
 
-void SimpleBST::add(Node *& node, Dato * elem)
+void AvlTree::add(Node *& node, Dato * elem)
 {
 	if (node == nullptr) {
 		node = new Node(elem);
@@ -53,7 +53,7 @@ void SimpleBST::add(Node *& node, Dato * elem)
 	
 }
 
-bool SimpleBST::find(Node * node, Dato * elem)
+bool AvlTree::find(Node * node, Dato * elem)
 {
 	if (node != nullptr) {
 		if (comp(node->element, elem, tag) == 0) {
@@ -69,7 +69,7 @@ bool SimpleBST::find(Node * node, Dato * elem)
 	return false;
 }
 
-void SimpleBST::findData(Node * node, Dato * elem, MATCH match, vector<Dato*>& vec, string tag)
+void AvlTree::findData(Node * node, Dato * elem, MATCH match, vector<Dato*>& vec, string tag)
 {
 	if (node == nullptr) return;
 
@@ -83,7 +83,7 @@ void SimpleBST::findData(Node * node, Dato * elem, MATCH match, vector<Dato*>& v
 
 
 
-void SimpleBST::preorder(Node * node, std::function<void(Dato*)> proc)
+void AvlTree::preorder(Node * node, std::function<void(Dato*)> proc)
 {
 	if (node != nullptr) {
 		proc(node->element);
@@ -92,7 +92,7 @@ void SimpleBST::preorder(Node * node, std::function<void(Dato*)> proc)
 	}
 }
 
-void SimpleBST::postorder(Node * node, std::function<void(Dato*)> proc)
+void AvlTree::postorder(Node * node, std::function<void(Dato*)> proc)
 {
 	if (node != nullptr) {
 		postorder(node->left, proc);
@@ -101,7 +101,7 @@ void SimpleBST::postorder(Node * node, std::function<void(Dato*)> proc)
 	}
 }
 
-void SimpleBST::inorder(Node * node, std::function<void(Dato*)> proc)
+void AvlTree::inorder(Node * node, std::function<void(Dato*)> proc)
 {
 	if (node != nullptr) {
 		inorder(node->left, proc);
@@ -110,7 +110,7 @@ void SimpleBST::inorder(Node * node, std::function<void(Dato*)> proc)
 	}
 }
 
-Dato * SimpleBST::mayorElemento(Node * node)
+Dato * AvlTree::mayorElemento(Node * node)
 {
 
 	while (node->right != nullptr) {
@@ -119,7 +119,7 @@ Dato * SimpleBST::mayorElemento(Node * node)
 	return node->element;
 }
 
-Dato * SimpleBST::menorElemento(Node * node)
+Dato * AvlTree::menorElemento(Node * node)
 {
 	while (node->left != nullptr) {
 		node = node->left;
@@ -127,7 +127,7 @@ Dato * SimpleBST::menorElemento(Node * node)
 	return node->element;
 }
 
-void SimpleBST::_BSTtoVector(Node * node, vector<Dato*> &vec)
+void AvlTree::_BSTtoVector(Node * node, vector<Dato*> &vec)
 {
 	if (node == nullptr) return;
 
@@ -136,27 +136,27 @@ void SimpleBST::_BSTtoVector(Node * node, vector<Dato*> &vec)
 	_BSTtoVector(node->right, vec);
 }
 
-int SimpleBST::height(Node * node)
+int AvlTree::height(Node * node)
 {
 	return node == nullptr ? -1 : node->height;
 }
 
-void SimpleBST::clear()
+void AvlTree::clear()
 {
 	clear(this->root);
 }
 
-void SimpleBST::add(Dato * elem)
+void AvlTree::add(Dato * elem)
 {
 	add(this->root, elem);
 }
 
-bool SimpleBST::find(Dato * elem)
+bool AvlTree::find(Dato * elem)
 {
 	return find(this->root, elem);
 }
 
-void SimpleBST::remove(Dato * elem)
+void AvlTree::remove(Dato * elem)
 {
 	// Encontrar elemento a eliminar;
 	Node* aux = this->root;
@@ -213,12 +213,12 @@ void SimpleBST::remove(Dato * elem)
 	delete aux2;
 }
 
-int SimpleBST::height()
+int AvlTree::height()
 {
 	return height(this->root);
 }
 
-void SimpleBST::Write(string file)
+void AvlTree::Write(string file)
 {
 	vector<Dato*> vec;
 	BSTtoVector(vec);
@@ -243,29 +243,29 @@ void SimpleBST::Write(string file)
 	fs.close();
 }
 
-void SimpleBST::preorder(std::function<void(Dato*)> proc)
+void AvlTree::preorder(std::function<void(Dato*)> proc)
 {
 	preorder(this->root, proc);
 }
 
-void SimpleBST::postorder(std::function<void(Dato*)> proc)
+void AvlTree::postorder(std::function<void(Dato*)> proc)
 {
 	postorder(this->root, proc);
 }
 
-void SimpleBST::inorder(std::function<void(Dato*)> proc)
+void AvlTree::inorder(std::function<void(Dato*)> proc)
 {
 	inorder(this->root, proc);
 }
 
-void SimpleBST::BSTtoVector(vector<Dato*> &vec)
+void AvlTree::BSTtoVector(vector<Dato*> &vec)
 {
 	_BSTtoVector(this->root, vec);
 }
 
-SimpleBST * SimpleBST::VectortoBST(const vector<Dato*> vec)
+AvlTree * AvlTree::VectortoBST(const vector<Dato*> vec)
 {
-	SimpleBST* bst = new SimpleBST(this->comp, this->tag);
+	AvlTree* bst = new AvlTree(this->comp, this->tag);
 	for each (Dato* var in vec)
 	{
 		bst->add(var);
@@ -273,14 +273,14 @@ SimpleBST * SimpleBST::VectortoBST(const vector<Dato*> vec)
 	return bst;
 }
 
-vector<Dato*> SimpleBST::Filter(Node * root)
+vector<Dato*> AvlTree::Filter(Node * root)
 {
 	vector<Dato*> vec;
 	_BSTtoVector(root, vec);
 	return vec;
 }
 
-vector<Dato*> SimpleBST::Greater(string tag, Dato * dato)
+vector<Dato*> AvlTree::Greater(string tag, Dato * dato)
 {
 	vector<Dato*> vec;
 	findData(this->root, dato, [&](Dato* a, Dato* b, string tag)
@@ -293,7 +293,7 @@ vector<Dato*> SimpleBST::Greater(string tag, Dato * dato)
 	return vec;
 }
 
-vector<Dato*> SimpleBST::Minor(string tag, Dato * dato)
+vector<Dato*> AvlTree::Minor(string tag, Dato * dato)
 {
 	vector<Dato*> vec;
 	findData(this->root, dato, [&](Dato* a, Dato* b, string tag)
@@ -306,7 +306,7 @@ vector<Dato*> SimpleBST::Minor(string tag, Dato * dato)
 	return vec;
 }
 
-vector<Dato*> SimpleBST::Equals(string tag, Dato * dato)
+vector<Dato*> AvlTree::Equals(string tag, Dato * dato)
 {
 	vector<Dato*> vec;
 	findData(this->root, dato, [&](Dato* a, Dato* b, string tag)
@@ -319,7 +319,7 @@ vector<Dato*> SimpleBST::Equals(string tag, Dato * dato)
 	return vec;
 }
 
-vector<Dato*> SimpleBST::Starts(string tag, Dato * dato)
+vector<Dato*> AvlTree::Starts(string tag, Dato * dato)
 {
 	vector<Dato*> vec;
 	findData(this->root, dato, [&](Dato* a, Dato* b, string tag)
@@ -332,7 +332,7 @@ vector<Dato*> SimpleBST::Starts(string tag, Dato * dato)
 	return vec;
 }
 
-vector<Dato*> SimpleBST::Ends(string tag, Dato * dato)
+vector<Dato*> AvlTree::Ends(string tag, Dato * dato)
 {
 	vector<Dato*> vec;
 	findData(this->root, dato, [&](Dato* a, Dato* b, string tag)
@@ -345,7 +345,7 @@ vector<Dato*> SimpleBST::Ends(string tag, Dato * dato)
 	return vec;
 }
 
-vector<Dato*> SimpleBST::Inside(string tag, Dato * dato)
+vector<Dato*> AvlTree::Inside(string tag, Dato * dato)
 {
 	vector<Dato*> vec;
 	findData(this->root, dato, [&](Dato* a, Dato* b, string tag)
@@ -358,7 +358,7 @@ vector<Dato*> SimpleBST::Inside(string tag, Dato * dato)
 	return vec;
 }
 
-vector<Dato*> SimpleBST::NotInside(string tag, Dato * dato)
+vector<Dato*> AvlTree::NotInside(string tag, Dato * dato)
 {
 	vector<Dato*> vec;
 	findData(this->root, dato, [&](Dato* a, Dato* b, string tag)
@@ -371,17 +371,17 @@ vector<Dato*> SimpleBST::NotInside(string tag, Dato * dato)
 	return vec;
 }
 
-Dato * SimpleBST::mayorElemento()
+Dato * AvlTree::mayorElemento()
 {
 	return mayorElemento(this->root);
 }
 
-Dato * SimpleBST::menorElemento()
+Dato * AvlTree::menorElemento()
 {
 	return menorElemento(this->root);
 }
 
-void SimpleBST::updateHeight(Node * node)
+void AvlTree::updateHeight(Node * node)
 {
 	if (node != nullptr) {
 		int hl = height(node->left);
@@ -391,7 +391,7 @@ void SimpleBST::updateHeight(Node * node)
 	}
 }
 
-void SimpleBST::RotateLeft(Node *& node)
+void AvlTree::RotateLeft(Node *& node)
 {
 	Node* aux = node->right;
 	node->right = aux->left;
@@ -401,7 +401,7 @@ void SimpleBST::RotateLeft(Node *& node)
 	node = aux;
 }
 
-void SimpleBST::RotateRight(Node *& node)
+void AvlTree::RotateRight(Node *& node)
 {
 	Node* aux = node->left;
 	node->left = aux->right;
@@ -411,7 +411,7 @@ void SimpleBST::RotateRight(Node *& node)
 	node = aux;
 }
 
-void SimpleBST::balance(Node *& node)
+void AvlTree::balance(Node *& node)
 {
 	int hl = height(node->left);
 	int hr = height(node->right);
@@ -437,7 +437,7 @@ void SimpleBST::balance(Node *& node)
 	}
 }
 
-string SimpleBST::toUpper(string str)
+string AvlTree::toUpper(string str)
 {
 	string ss = str;
 	transform(ss.begin(), ss.end(), ss.begin(), ::toupper);

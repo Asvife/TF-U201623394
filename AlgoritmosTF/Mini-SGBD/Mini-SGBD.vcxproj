@@ -137,7 +137,7 @@
     <ClCompile Include="Fila.cpp" />
     <ClCompile Include="MSG.cpp" />
     <ClCompile Include="rDato.cpp" />
-    <ClCompile Include="SimpleBST.cpp" />
+    <ClCompile Include="AvlTree.cpp" />
     <ClCompile Include="Table.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,7 +148,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="rDato.h" />
-    <ClInclude Include="SimpleBST.h" />
+    <ClInclude Include="AvlTree.h" />
     <ClInclude Include="Table.h">
       <FileType>CppForm</FileType>
     </ClInclude>

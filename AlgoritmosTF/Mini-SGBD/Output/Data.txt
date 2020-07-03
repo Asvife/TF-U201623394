@@ -1,2 +1,2 @@
-Nombre,Apellidos,Edad,
-Luis,Perez,20,
+Nombre,Apellido,Edad,Sexo,Enfermedad,
+Danna,Paola,27,F,Asma,

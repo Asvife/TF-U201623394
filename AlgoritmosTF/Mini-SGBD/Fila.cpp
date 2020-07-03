@@ -116,7 +116,7 @@ void Fila::Read(string file)
 	
 }
 
-SimpleBST * Fila::getCurrentTree()
+AvlTree * Fila::getCurrentTree()
 {
 	return cols[row]->getCol();
 }
