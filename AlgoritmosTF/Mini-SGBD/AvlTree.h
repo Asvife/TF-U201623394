@@ -14,12 +14,12 @@ typedef std::function<int(Dato* a, Dato* b, string tag)>  MATCH;
 
 class AvlTree {
 	struct Node {
-		Dato * element;
+		Dato* element;
 		Node* left;
 		Node* right;
 		int height;
 
-		Node(Dato * elem)
+		Node(Dato* elem)
 			: element(elem), height(0), left(nullptr), right(nullptr) {}
 	};
 	Node* root;
@@ -31,34 +31,35 @@ private:
 	bool startsWith(const std::string& str, const std::string& prefix);
 	void clear(Node* node);
 	//Agregar elemento en un Binary Search Tree
-	void add(Node*& node, Dato * elem);
+	void add(Node*& node, Dato* elem);
 	//Comprobar si se encontró un elemento en un Binary Search Tree
-	bool find(Node* node, Dato * elem);
-	void findData(Node* node, Dato * elem, MATCH match, vector<Dato*>&vec, string tag);
-	void preorder(Node* node, std::function<void(Dato *)> proc);
-	void postorder(Node* node, std::function<void(Dato *)> proc);
-	void inorder(Node* node, std::function<void(Dato *)> proc);
+	bool find(Node* node, Dato* elem);
+	void findData(Node* node, Dato* elem, MATCH match, vector<Dato*>& vec, string tag);
+	void preorder(Node* node, std::function<void(Dato*)> proc);
+	void postorder(Node* node, std::function<void(Dato*)> proc);
+	void inorder(Node* node, std::function<void(Dato*)> proc);
 	//IMPLEMENTAR AQUI METODOS ADICIONALES
-	Dato * mayorElemento(Node* node);
-	Dato * menorElemento(Node* node);
-	void _BSTtoVector(Node* root, vector<Dato*> &vec);
+	Dato* mayorElemento(Node* node);
+	Dato* menorElemento(Node* node);
+	void _BSTtoVector(Node* root, vector<Dato*>& vec);
 	int height(Node* node);
 	string toUpper(string str);
+	bool findInVec(string str, vector<string> vec);
 public:
 	AvlTree(MATCH comp, string tag);
 	~AvlTree();
 	void clear();
-	void add(Dato * elem);
-	bool find(Dato * elem);
-	void remove(Dato * elem);
+	void add(Dato* elem);
+	bool find(Dato* elem);
+	void remove(Dato* elem);
 	int height();
-	void Write(string file);
+	void Write(string file, vector<string> Disponibles);
 
-	void preorder(std::function<void(Dato *)> proc);
-	void postorder(std::function<void(Dato *)> proc);
-	void inorder(std::function<void(Dato *)> proc);
+	void preorder(std::function<void(Dato*)> proc);
+	void postorder(std::function<void(Dato*)> proc);
+	void inorder(std::function<void(Dato*)> proc);
 
-	void BSTtoVector(vector<Dato*> &vec);
+	void BSTtoVector(vector<Dato*>& vec);
 	AvlTree* VectortoBST(const vector<Dato*> vec);
 	vector<Dato*> Filter(Node* root);
 	vector<Dato*> Greater(string tag, Dato* dato);
@@ -69,8 +70,8 @@ public:
 	vector<Dato*> Inside(string tag, Dato* dato);
 	vector<Dato*> NotInside(string tag, Dato* dato);
 	//METODOS ADICIONALES
-	Dato * mayorElemento();
-	Dato * menorElemento();
+	Dato* mayorElemento();
+	Dato* menorElemento();
 
 	void updateHeight(Node* node);
 	void RotateLeft(Node*& node);

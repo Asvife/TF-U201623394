@@ -24,7 +24,7 @@ AvlTree::~AvlTree()
 	clear(this->root);
 }
 
-void AvlTree::clear(Node * node)
+void AvlTree::clear(Node* node)
 {
 	if (node != nullptr) {
 		clear(node->left);
@@ -34,7 +34,7 @@ void AvlTree::clear(Node * node)
 	}
 }
 
-void AvlTree::add(Node *& node, Dato * elem)
+void AvlTree::add(Node*& node, Dato* elem)
 {
 	if (node == nullptr) {
 		node = new Node(elem);
@@ -50,10 +50,10 @@ void AvlTree::add(Node *& node, Dato * elem)
 		}
 		balance(node);
 	}
-	
+
 }
 
-bool AvlTree::find(Node * node, Dato * elem)
+bool AvlTree::find(Node* node, Dato* elem)
 {
 	if (node != nullptr) {
 		if (comp(node->element, elem, tag) == 0) {
@@ -69,7 +69,7 @@ bool AvlTree::find(Node * node, Dato * elem)
 	return false;
 }
 
-void AvlTree::findData(Node * node, Dato * elem, MATCH match, vector<Dato*>& vec, string tag)
+void AvlTree::findData(Node* node, Dato* elem, MATCH match, vector<Dato*>& vec, string tag)
 {
 	if (node == nullptr) return;
 
@@ -77,13 +77,13 @@ void AvlTree::findData(Node * node, Dato * elem, MATCH match, vector<Dato*>& vec
 	if (match(node->element, elem, tag) == 1)
 		vec.push_back(node->element);
 	findData(node->right, elem, match, vec, tag);
-	
+
 }
 
 
 
 
-void AvlTree::preorder(Node * node, std::function<void(Dato*)> proc)
+void AvlTree::preorder(Node* node, std::function<void(Dato*)> proc)
 {
 	if (node != nullptr) {
 		proc(node->element);
@@ -92,7 +92,7 @@ void AvlTree::preorder(Node * node, std::function<void(Dato*)> proc)
 	}
 }
 
-void AvlTree::postorder(Node * node, std::function<void(Dato*)> proc)
+void AvlTree::postorder(Node* node, std::function<void(Dato*)> proc)
 {
 	if (node != nullptr) {
 		postorder(node->left, proc);
@@ -101,7 +101,7 @@ void AvlTree::postorder(Node * node, std::function<void(Dato*)> proc)
 	}
 }
 
-void AvlTree::inorder(Node * node, std::function<void(Dato*)> proc)
+void AvlTree::inorder(Node* node, std::function<void(Dato*)> proc)
 {
 	if (node != nullptr) {
 		inorder(node->left, proc);
@@ -110,7 +110,7 @@ void AvlTree::inorder(Node * node, std::function<void(Dato*)> proc)
 	}
 }
 
-Dato * AvlTree::mayorElemento(Node * node)
+Dato* AvlTree::mayorElemento(Node* node)
 {
 
 	while (node->right != nullptr) {
@@ -119,7 +119,7 @@ Dato * AvlTree::mayorElemento(Node * node)
 	return node->element;
 }
 
-Dato * AvlTree::menorElemento(Node * node)
+Dato* AvlTree::menorElemento(Node* node)
 {
 	while (node->left != nullptr) {
 		node = node->left;
@@ -127,7 +127,7 @@ Dato * AvlTree::menorElemento(Node * node)
 	return node->element;
 }
 
-void AvlTree::_BSTtoVector(Node * node, vector<Dato*> &vec)
+void AvlTree::_BSTtoVector(Node* node, vector<Dato*>& vec)
 {
 	if (node == nullptr) return;
 
@@ -136,7 +136,7 @@ void AvlTree::_BSTtoVector(Node * node, vector<Dato*> &vec)
 	_BSTtoVector(node->right, vec);
 }
 
-int AvlTree::height(Node * node)
+int AvlTree::height(Node* node)
 {
 	return node == nullptr ? -1 : node->height;
 }
@@ -146,17 +146,17 @@ void AvlTree::clear()
 	clear(this->root);
 }
 
-void AvlTree::add(Dato * elem)
+void AvlTree::add(Dato* elem)
 {
 	add(this->root, elem);
 }
 
-bool AvlTree::find(Dato * elem)
+bool AvlTree::find(Dato* elem)
 {
 	return find(this->root, elem);
 }
 
-void AvlTree::remove(Dato * elem)
+void AvlTree::remove(Dato* elem)
 {
 	// Encontrar elemento a eliminar;
 	Node* aux = this->root;
@@ -218,7 +218,7 @@ int AvlTree::height()
 	return height(this->root);
 }
 
-void AvlTree::Write(string file)
+void AvlTree::Write(string file, vector<string> Disponibles)
 {
 	vector<Dato*> vec;
 	BSTtoVector(vec);
@@ -226,15 +226,17 @@ void AvlTree::Write(string file)
 	fs.clear();
 	for each (string ss in vec[0]->getTags())
 	{
-		fs << ss << ",";
+		if (!findInVec(ss, Disponibles))
+			fs << ss << ",";
 	}
 	fs << endl;
 
-	for each (Dato* var in vec)
+	for each (Dato * var in vec)
 	{
-		for each (string ss in var->getData())
+		for (int i = 0; i < var->getData().size(); i++)
 		{
-			fs << ss << ",";
+			if (!findInVec(var->getTags()[i], Disponibles))
+				fs << var->getData()[i] << ",";
 		}
 		fs << endl;
 	}
@@ -258,130 +260,130 @@ void AvlTree::inorder(std::function<void(Dato*)> proc)
 	inorder(this->root, proc);
 }
 
-void AvlTree::BSTtoVector(vector<Dato*> &vec)
+void AvlTree::BSTtoVector(vector<Dato*>& vec)
 {
 	_BSTtoVector(this->root, vec);
 }
 
-AvlTree * AvlTree::VectortoBST(const vector<Dato*> vec)
+AvlTree* AvlTree::VectortoBST(const vector<Dato*> vec)
 {
 	AvlTree* bst = new AvlTree(this->comp, this->tag);
-	for each (Dato* var in vec)
+	for each (Dato * var in vec)
 	{
 		bst->add(var);
 	}
 	return bst;
 }
 
-vector<Dato*> AvlTree::Filter(Node * root)
+vector<Dato*> AvlTree::Filter(Node* root)
 {
 	vector<Dato*> vec;
 	_BSTtoVector(root, vec);
 	return vec;
 }
 
-vector<Dato*> AvlTree::Greater(string tag, Dato * dato)
+vector<Dato*> AvlTree::Greater(string tag, Dato* dato)
 {
 	vector<Dato*> vec;
 	findData(this->root, dato, [&](Dato* a, Dato* b, string tag)
-	{
-		if (toUpper(a->findByTag(tag)) > toUpper(b->findByTag(tag)))
-			return 1;
-		else
-			return 0;
-	}, vec, tag);
+		{
+			if (toUpper(a->findByTag(tag)) > toUpper(b->findByTag(tag)))
+				return 1;
+			else
+				return 0;
+		}, vec, tag);
 	return vec;
 }
 
-vector<Dato*> AvlTree::Minor(string tag, Dato * dato)
+vector<Dato*> AvlTree::Minor(string tag, Dato* dato)
 {
 	vector<Dato*> vec;
 	findData(this->root, dato, [&](Dato* a, Dato* b, string tag)
-	{
-		if (toUpper(a->findByTag(tag)) < toUpper(b->findByTag(tag)))
-			return 1;
-		else
-			return 0;
-	}, vec, tag);
+		{
+			if (toUpper(a->findByTag(tag)) < toUpper(b->findByTag(tag)))
+				return 1;
+			else
+				return 0;
+		}, vec, tag);
 	return vec;
 }
 
-vector<Dato*> AvlTree::Equals(string tag, Dato * dato)
+vector<Dato*> AvlTree::Equals(string tag, Dato* dato)
 {
 	vector<Dato*> vec;
 	findData(this->root, dato, [&](Dato* a, Dato* b, string tag)
-	{
-		if (toUpper(a->findByTag(tag)) == toUpper(b->findByTag(tag)))
-			return 1;
-		else
-			return 0;
-	}, vec, tag);
+		{
+			if (toUpper(a->findByTag(tag)) == toUpper(b->findByTag(tag)))
+				return 1;
+			else
+				return 0;
+		}, vec, tag);
 	return vec;
 }
 
-vector<Dato*> AvlTree::Starts(string tag, Dato * dato)
+vector<Dato*> AvlTree::Starts(string tag, Dato* dato)
 {
 	vector<Dato*> vec;
 	findData(this->root, dato, [&](Dato* a, Dato* b, string tag)
-	{
-		if (startsWith(toUpper(a->findByTag(tag)), toUpper(b->findByTag(tag))))
-			return 1;
-		else
-			return 0;
-	}, vec, tag);
+		{
+			if (startsWith(toUpper(a->findByTag(tag)), toUpper(b->findByTag(tag))))
+				return 1;
+			else
+				return 0;
+		}, vec, tag);
 	return vec;
 }
 
-vector<Dato*> AvlTree::Ends(string tag, Dato * dato)
+vector<Dato*> AvlTree::Ends(string tag, Dato* dato)
 {
 	vector<Dato*> vec;
 	findData(this->root, dato, [&](Dato* a, Dato* b, string tag)
-	{
-		if (endsWith(toUpper(a->findByTag(tag)),toUpper(b->findByTag(tag))))
-			return 1;
-		else
-			return 0;
-	}, vec, tag);
+		{
+			if (endsWith(toUpper(a->findByTag(tag)), toUpper(b->findByTag(tag))))
+				return 1;
+			else
+				return 0;
+		}, vec, tag);
 	return vec;
 }
 
-vector<Dato*> AvlTree::Inside(string tag, Dato * dato)
+vector<Dato*> AvlTree::Inside(string tag, Dato* dato)
 {
 	vector<Dato*> vec;
 	findData(this->root, dato, [&](Dato* a, Dato* b, string tag)
-	{
-		if (toUpper(a->findByTag(tag)).find(toUpper(b->findByTag(tag))) != string::npos)
-			return 1;
-		else
-			return 0;
-	}, vec, tag);
+		{
+			if (toUpper(a->findByTag(tag)).find(toUpper(b->findByTag(tag))) != string::npos)
+				return 1;
+			else
+				return 0;
+		}, vec, tag);
 	return vec;
 }
 
-vector<Dato*> AvlTree::NotInside(string tag, Dato * dato)
+vector<Dato*> AvlTree::NotInside(string tag, Dato* dato)
 {
 	vector<Dato*> vec;
 	findData(this->root, dato, [&](Dato* a, Dato* b, string tag)
-	{
-		if (toUpper(a->findByTag(tag)).find(toUpper(b->findByTag(tag))) == string::npos)
-			return 1;
-		else
-			return 0;
-	}, vec, tag);
+		{
+			if (toUpper(a->findByTag(tag)).find(toUpper(b->findByTag(tag))) == string::npos)
+				return 1;
+			else
+				return 0;
+		}, vec, tag);
 	return vec;
 }
 
-Dato * AvlTree::mayorElemento()
+Dato* AvlTree::mayorElemento()
 {
 	return mayorElemento(this->root);
 }
 
-Dato * AvlTree::menorElemento()
+Dato* AvlTree::menorElemento()
 {
 	return menorElemento(this->root);
 }
 
-void AvlTree::updateHeight(Node * node)
+void AvlTree::updateHeight(Node* node)
 {
 	if (node != nullptr) {
 		int hl = height(node->left);
@@ -391,7 +393,7 @@ void AvlTree::updateHeight(Node * node)
 	}
 }
 
-void AvlTree::RotateLeft(Node *& node)
+void AvlTree::RotateLeft(Node*& node)
 {
 	Node* aux = node->right;
 	node->right = aux->left;
@@ -401,7 +403,7 @@ void AvlTree::RotateLeft(Node *& node)
 	node = aux;
 }
 
-void AvlTree::RotateRight(Node *& node)
+void AvlTree::RotateRight(Node*& node)
 {
 	Node* aux = node->left;
 	node->left = aux->right;
@@ -411,7 +413,7 @@ void AvlTree::RotateRight(Node *& node)
 	node = aux;
 }
 
-void AvlTree::balance(Node *& node)
+void AvlTree::balance(Node*& node)
 {
 	int hl = height(node->left);
 	int hr = height(node->right);
@@ -442,4 +444,14 @@ string AvlTree::toUpper(string str)
 	string ss = str;
 	transform(ss.begin(), ss.end(), ss.begin(), ::toupper);
 	return ss;
+}
+
+bool AvlTree::findInVec(string str, vector<string> vec)
+{
+	for each (string ss in vec)
+	{
+		if (str == ss)
+			return true;
+	}
+	return false;
 }
