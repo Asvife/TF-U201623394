@@ -1,6 +1,6 @@
 Nombre,Apellido,Edad,Sexo,Enfermedad,
 Maria,Fernandez,19,F,Diabetes,
-Juan, Ballesteros,28,M,Inmunodepresion,
+Juan,Ballesteros,28,M,Inmunodepresion,
 Marcos,Gonzales,50,M,Obesidad,
 Thomas,Hearns,61,M,Ninguna,
 Alexander,Hamilton,27,M,Fibrosis_Pulmonar,
